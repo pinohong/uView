@@ -1,5 +1,5 @@
 <template>
-	<view class="u-dropdown">
+	<view class="u-dropdown" :style="dropDownShow ? '' :'overflow:hidden'">
 		<view class="u-dropdown__menu" :style="{
 			height: $u.addUnit(height)
 		}" :class="{
@@ -112,6 +112,7 @@
 		},
 		data() {
 			return {
+				dropDownShow:false,
 				showDropdown: true, // 是否打开下来菜单,
 				menuList: [], // 显示的菜单
 				active: false, // 下拉菜单的状态
@@ -186,6 +187,7 @@
 				this.children.map((val, idx) => {
 					val.active = index == idx ? true : false;
 				})
+				this.dropDownShow = true
 				this.$emit('open', this.current);
 			},
 			// 设置下拉菜单处于收起状态
@@ -199,6 +201,7 @@
 					zIndex: -1,
 					opacity: 0
 				}
+				this.dropDownShow = false
 			},
 			// 点击遮罩
 			maskClick() {
